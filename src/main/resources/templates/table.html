@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List Of Users</title>
+    <style>
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border: 5px solid #fff;
+            border-top: 5px solid #fff;
+            border-bottom: 3px solid #fff;
+            border-collapse: collapse;
+            outline: 3px solid #ffd300;
+            font-size: 15px;
+            background: #fff!important;
+        }
+        table th {
+            font-weight: bold;
+            padding: 7px;
+            background: #ffd300;
+            border: none;
+            text-align: left;
+            font-size: 15px;
+            border-top: 3px solid #fff;
+            border-bottom: 3px solid #ffd300;
+        }
+        table td {
+            padding: 7px;
+            border: none;
+            border-top: 3px solid #fff;
+            border-bottom: 3px solid #fff;
+            font-size: 15px;
+        }
+        table tbody tr:nth-child(even){
+            background: #f8f8f8!important;
+        }
+
+        td button {
+            padding: 3px;
+            background-color: dodgerblue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+    </style>
+    <style>
+        .btn {
+            display: inline-block; /* Строчно-блочный элемент */
+            background: #8C959D; /* Серый цвет фона */
+            color: #fff; /* Белый цвет текста */
+            padding: 1rem 1.5rem; /* Поля вокруг текста */
+            text-decoration: none; /* Убираем подчёркивание */
+            border-radius: 3px; /* Скругляем уголки */
+        }
+    </style>
+
+    <style>
+        button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px; /* Добавлено для создания небольших отступов между кнопками */
+        }
+    </style>
+
+</head>
+<body>
+<h1>Users List</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.first_name}"></td>
+        <td th:text="${user.last_name}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.email}"></td>
+        <td>
+            <a th:href="@{'/user-update/' + ${user.id}}" class="button">Edit</a> |
+            <a th:href="@{'/user-delete/' + ${user.id}}" class="button">Delete</a>
+        </td>
+    </tr>
+</table>
+<a th:href="@{/user-create}" class="button">Create</a>
+</body>
+</html>
