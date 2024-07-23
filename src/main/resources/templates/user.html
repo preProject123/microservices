@@ -1,11 +1,65 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Spring Security Example</title>
+    <meta charset="UTF-8">
+    <title>User Info</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #555;
+        }
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .user-details div {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
-
-
+<div class="container">
+    <h1>User Info</h1>
+    <div th:if="${user == null}">
+        <p>User not found or not provided.</p>
+    </div>
+    <div th:if="${user != null}" class="user-details">
+        <div>
+            <span>ID</span>
+            <span th:text="${user.id}">1</span>
+        </div>
+        <div>
+            <span>Username</span>
+            <span th:text="${user.username}">example</span>
+        </div>
+        <div>
+            <span>Role</span>
+            <span th:each="role : ${user.roles}" th:text="${role.name}"></span>
+        </div>
+    </div>
+</div>
 </body>
 </html>
